@@ -21,6 +21,9 @@ jobs:
       - name: Ensure reports folder exists
         run: mkdir -p reports
 
+      - name: Fix ESLint binary permissions
+        run: chmod +x ./node_modules/.bin/eslint
+
       - name: Run ESLint and generate SARIF report
         run: npm run lint
 
