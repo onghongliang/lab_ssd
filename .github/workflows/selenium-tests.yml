@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests
-        run: npm test
+        run: npx mocha tests --extension js
 
       - name: Run UI Tests (Selenium)
         run: npm run test:ui
