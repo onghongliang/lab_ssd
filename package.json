@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "mocha tests/*.js --loader ts-node/esm",
+    "test": "mocha tests --extension js",
     "test:ui": "node tests/SeleniumTest.mjs github"
   },
   "devDependencies": {
@@ -9,6 +9,7 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "selenium-webdriver": "^4.21.0"
   },
   "type": "module"
