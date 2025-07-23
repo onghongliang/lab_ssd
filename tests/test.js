@@ -1,3 +1,4 @@
+/* global document, window, navigator */
 import { expect } from 'chai';
 import { getCurrentTimestamp, server } from '../src/server.js';
 
