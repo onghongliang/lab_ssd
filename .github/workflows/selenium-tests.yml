@@ -1,0 +1,38 @@
+name: Automated Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome
+        ports:
+          - 4444:4444
+        options: >-
+          --shm-size=2g
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Start Node.js server
+      run: |
+        node src/server.js &
+        sleep 3
+
+    - name: Run Unit Tests with Mocha
+      run: npm test
+
+    - name: Run UI Test with Selenium
+      run: npm run test:ui
