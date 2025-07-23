@@ -26,11 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start the Node.js server
-        run: |
-          node src/server.js &
-          sleep 3
-
       - name: Run Unit Tests
         run: npm test
 
