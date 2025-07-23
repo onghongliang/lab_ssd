@@ -27,7 +27,9 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests
-        run: npx mocha tests --extension js
+        run: |
+          chmod +x ./node_modules/.bin/mocha
+          ./node_modules/.bin/mocha tests --extension js
 
       - name: Run UI Tests (Selenium)
         run: npm run test:ui
