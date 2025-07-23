@@ -2,9 +2,10 @@
   "scripts": {
     "test": "mocha tests --extension js",
     "test:ui": "node tests/SeleniumTest.mjs github",
-    "lint": "eslint . --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif"
+    "lint": "eslint . --format @microsoft/eslint-formatter-sarif --output-file reports/eslint-results.sarif"
   },
   "devDependencies": {
+    "@eslint/js": "^9.31.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "chai": "^4.3.7",
     "eslint": "^9.31.0",

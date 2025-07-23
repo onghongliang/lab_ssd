@@ -3,35 +3,28 @@ name: ESLint Code Analysis
 on: [push, pull_request]
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Cache Node.js modules
-        uses: actions/cache@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-modules
+          node-version: '20'
 
-      - name: Install Node.js dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Create reports directory
+      - name: Ensure reports folder exists
         run: mkdir -p reports
 
-      - name: Install ESLint SARIF Formatter
-        run: npm install @microsoft/eslint-formatter-sarif --save-dev
+      - name: Run ESLint and generate SARIF report
+        run: npm run lint
 
-      - name: Run ESLint with SARIF output
-        run: npx eslint . --format @microsoft/eslint-formatter-sarif --output-file reports/eslint-results.sarif || true
-
-      - name: Debug ESLint Output
-        run: cat reports/eslint-results.sarif || echo "No SARIF report generated"
-
-      - name: Upload SARIF report
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Upload SARIF report to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: reports/eslint-results.sarif
