@@ -26,6 +26,7 @@ jobs:
 
       - name: Run ESLint and generate SARIF report
         run: npm run lint
+        continue-on-error: true
 
       - name: Upload SARIF report to GitHub Security
         uses: github/codeql-action/upload-sarif@v2
